@@ -1,0 +1,134 @@
+/* Font settings */
+@font-face {
+    font-family: 'Chicago';
+    src: url('fonts/chicago-font.woff2') format('woff2'),
+         url('fonts/chicago-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Font settings for pixelated effect */
+.pixel-text {
+    font-family: 'Chicago', 'Monaco', 'Lucida Console', 'Courier New', monospace; /* Use retro fonts */
+    font-size: 14px; /* Adjust size for better pixelation */
+    line-height: 1.2; /* Keep the lines close together */
+    letter-spacing: 0.5px; /* Slight spacing to mimic pixelated UI */
+    transform: scale(1); /* Slightly scales the text to appear thicker */
+    color: #333; /* Dark gray for readability */
+    /* text-transform: uppercase; /* Optional: makes text look like an old UI */
+}
+
+/* Disable font smoothing for pixelation */
+.pixel-text {
+    -webkit-font-smoothing: none; /* Disable WebKit anti-aliasing */
+    -moz-osx-font-smoothing: grayscale; /* Disable macOS font smoothing */
+    font-smooth: never; /* General font-smoothing property */
+}
+
+/* Reset body styles */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DFE0E2; /* Light gray background */
+    font-family: 'Chicago', sans-serif;
+}
+
+/* iPod Screen */
+.ipod-screen {
+    width: 62vw; /* 95% of the viewport width */
+    height: 50vh; /* 95% of the viewport height */
+    background-color: #DAD9D4; /* iPod screen color */
+    border: 1px solid #A9AAA7; /* Silver border like an iPod */
+    border-radius: 15px; /* Rounded corners */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Spread content evenly */
+    align-items: center;
+    overflow: hidden; /* Prevent content overflow */
+    position: relative; /* For absolute positioning inside */
+}
+
+/* Top Section (Battery and Title) */
+.ipod-top {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #2F302C; /* Add a subtle separation line */
+}
+
+.ipod-top-middle-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.battery {
+    width: 40px;
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Spacing from the edge */
+}
+
+/* Main Content Section */
+.screen-content {
+    flex: 1; /* Take up all available space */
+    width: 90%; /* Center content with padding */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    padding: 10px; /* Prevent text from touching edges */
+    background-color: #FFF; /* White content area */
+}
+
+/* Menu list */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.menu li {
+    font-size: 16px;
+    padding: 8px 20px;
+    color: #333; /* Dark gray for inactive items */
+    cursor: pointer;
+}
+
+.menu li::after {
+    content: '>'; /* Unicode for right-facing arrow */
+    font-size: 16px; /* Match the text size */
+    font-weight: bold;
+    color: #000; /* Arrow color */
+    position: absolute;
+    right: 0; /* Position arrow to the far right */
+    padding-right: 5px; /* Add space between side and arrow */
+}
+
+/* Highlighted (selected) menu item */
+.menu .selected {
+    background-color: #000; /* Black highlight bar */
+    color: #fff; /* White text for selected item */
+    font-weight: bold;
+}
+
+/* Footer Section */
+.footer {
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    background-color: #EDEDED; /* Match top section */
+    border-top: 2px solid #A9AAA7; /* Add a subtle separation line */
+}
