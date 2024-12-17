@@ -11,8 +11,8 @@
 .pixel-text {
     font-family: 'Chicago', 'Monaco', 'Lucida Console', 'Courier New', monospace; /* Use retro fonts */
     font-size: 14px; /* Adjust size for better pixelation */
-    line-height: 1.2; /* Keep the lines close together */
-    letter-spacing: 0.5px; /* Slight spacing to mimic pixelated UI */
+    line-height: .69; /* Keep the lines close together */
+    letter-spacing: 0px; /* Slight spacing to mimic pixelated UI */
     transform: scale(1); /* Slightly scales the text to appear thicker */
     color: #333; /* Dark gray for readability */
     /* text-transform: uppercase; /* Optional: makes text look like an old UI */
@@ -33,16 +33,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #DFE0E2; /* Light gray background */
+    background-color: #dadace; /* Light gray background */
     font-family: 'Chicago', sans-serif;
 }
 
 /* iPod Screen */
 .ipod-screen {
-    width: 600px; /* Fixed width */
-    height: 450px; /* Fixed height */
-    background-color: #DAD9D4; /* iPod screen color */
+    width: 300px; /* Fixed width */
+    height: 240px; /* Fixed height */
+    background-color: #BDBDBD; /* iPod screen color */
     border: 1px solid #A9AAA7; /* Silver border like an iPod */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 15px; /* Rounded corners */
     display: flex;
     flex-direction: column; /* Stack elements vertically */
@@ -50,6 +51,94 @@ body {
     align-items: center;
     overflow: hidden; /* Prevent content overflow */
     position: relative; /* For absolute positioning inside */
+}
+
+.ipod-body {
+    box-sizing: border-box;
+    width: 430px;
+    height: 711px;
+    padding-top: 27px;
+    /*background-color: #D7D9DB;*/
+    background: linear-gradient(180deg, #D7D9DB, #e2e2e2);
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.menu {
+    list-style: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.menu li {
+    margin: 5px 0;
+}
+
+.menu .active {
+    background: #444;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+/* Click Wheel */
+.click-wheel {
+    margin-top: 74px; 
+    position: relative;
+    width: 284px;
+    height: 284px;
+    background: linear-gradient(250deg, #EEEEEE, #DDDFDF);
+    border-radius: 50%;
+    border: .2px solid #333;
+    /*filter: blur(.1px);*/
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ipod-buttons {
+    position: relative;
+    width: 200px; /* Outer ring size */
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%; /* Full circle */
+    background: #f9f9f9;
+}
+
+.button {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background: #ddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    background: #ccc;
+}
+
+/* Positioning buttons */
+.button.center {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(100deg, #EEEEEE, #DDDFDF);
+    border-radius: 50%;
+    border: .2px solid #333;
+    filter: blur(.1px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Top Section (Battery and Title) */
@@ -68,6 +157,7 @@ body {
     justify-content: center; /* Horizontally center the text */
     align-items: center; /* Vertically center the text */
     text-align: center; /* Ensure text is centered */
+    padding-left: 45px;
 }
 
 .ipod-top-middle-text {
