@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Murphy - University of Oregon</title>
+    <title>iDylan Murphy - GitHub</title>
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="style.css">
     <!-- Favicon (optional) -->
@@ -18,29 +18,52 @@
             <div class="ipod-top">
                 <div class="ipod-top-left"></div>
                 <div class="ipod-top-middle">
-                    <h1 class="pixel-text">iDylan Murphy</h1>
+                    <h1 class="pixel-text">GitHub</h1>
                 </div>
                 <div class="ipod-top-right">
                     <img src="images/battery.png" alt="battery" class="battery">
                 </div>
             </div>
-            <!-- Menu -->
-            <ul class="menu pixel-text">
-                <li><a href="skills.html" style="color: inherit; text-decoration: none;">Skills</a></li>
-                <li><a href="lang.html" style="color: inherit; text-decoration: none;">Programming Languages</a></li>
-                <li>Projects</li>
-                <li><a href="linkedin.html" style="color: inherit; text-decoration: none;">LinkedIn</a></li>
-                <li><a href="github.html" style="color: inherit; text-decoration: none;">GitHub</a></li>
-                <li><a href="nowplaying.html" style="color: inherit; text-decoration: none;">Now Playing</a></li>
-            </ul>
+            
+            <!-- GitHub Preview Content -->
+            <div class="preview-content">
+                <div class="profile-section pixel-text">
+                    <div class="profile-name">djmurphy6</div>
+                    <div class="profile-title">Computer Science Student</div>
+                    <div class="profile-location">University of Oregon</div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="info-section pixel-text">
+                    <div class="info-item">
+                        <span class="label">Languages:</span>
+                        <span class="value">Python, Java, C++</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Projects:</span>
+                        <span class="value">Web Development</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Focus:</span>
+                        <span class="value">Full Stack Dev</span>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <!-- Navigation Menu -->
+                <ul class="menu pixel-text">
+                    <li><a href="https://github.com/djmurphy6" target="_blank" style="color: inherit; text-decoration: none;">View Repositories</a></li>
+                    <li><a href="index.html" style="color: inherit; text-decoration: none;">Back to Menu</a></li>
+                </ul>
+            </div>
         </div>
         
         <!-- Click Wheel -->
         <div class="click-wheel" id="click-wheel">
             <div class="button center" id="center-button" style="border-radius: 50%; width: 100px; height: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
         </div>
-
-        <!-- iPod Buttons -->
     </div>
 
     <script>
@@ -52,7 +75,7 @@
         let isMouseDown = false;
         let lastAngle = 0;
         let totalRotation = 0;
-        const sensitivity = 1.5; // How sensitive the wheel is
+        const sensitivity = 1.5;
         
         // Initialize first item as selected
         if (menuItems.length > 0) {
@@ -73,7 +96,6 @@
 
         // Mouse events for spinning
         clickWheel.addEventListener('mousedown', function(e) {
-            // Don't start spinning if clicking the center button
             if (e.target === centerButton) return;
             
             isMouseDown = true;
@@ -88,21 +110,19 @@
             const currentAngle = getAngle(e, clickWheel);
             let deltaAngle = currentAngle - lastAngle;
             
-            // Handle angle wraparound (from -180 to 180)
             if (deltaAngle > 180) deltaAngle -= 360;
             if (deltaAngle < -180) deltaAngle += 360;
             
             totalRotation += deltaAngle * sensitivity;
             
-            // Navigate based on rotation
-            const rotationThreshold = 30; // degrees needed to move one menu item
+            const rotationThreshold = 30;
             if (Math.abs(totalRotation) >= rotationThreshold) {
                 if (totalRotation > 0) {
                     navigateDown();
                 } else {
                     navigateUp();
                 }
-                totalRotation = 0; // Reset after navigation
+                totalRotation = 0;
             }
             
             lastAngle = currentAngle;
@@ -111,7 +131,7 @@
         document.addEventListener('mouseup', function() {
             isMouseDown = false;
             clickWheel.style.cursor = 'grab';
-            totalRotation = 0; // Reset on release
+            totalRotation = 0;
         });
 
         // Touch events for mobile
@@ -131,13 +151,12 @@
             const currentAngle = getAngle(touch, clickWheel);
             let deltaAngle = currentAngle - lastAngle;
             
-            // Handle angle wraparound
             if (deltaAngle > 180) deltaAngle -= 360;
             if (deltaAngle < -180) deltaAngle += 360;
             
             totalRotation += deltaAngle * sensitivity;
             
-            const rotationThreshold = 25; // Slightly more sensitive on touch
+            const rotationThreshold = 25;
             if (Math.abs(totalRotation) >= rotationThreshold) {
                 if (totalRotation > 0) {
                     navigateDown();
@@ -158,11 +177,11 @@
 
         // Center button functionality
         centerButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent wheel spinning
+            e.stopPropagation();
             selectCurrentItem();
         });
 
-        // Keyboard navigation (for desktop experience)
+        // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             switch(e.key) {
                 case 'ArrowUp':
@@ -184,7 +203,6 @@
         function navigateUp() {
             if (menuItems.length === 0) return;
             
-            // Don't wrap around - stop at the top
             if (currentSelection === 0) return;
             
             menuItems[currentSelection].classList.remove('selected');
@@ -195,7 +213,6 @@
         function navigateDown() {
             if (menuItems.length === 0) return;
             
-            // Don't wrap around - stop at the bottom
             if (currentSelection === menuItems.length - 1) return;
             
             menuItems[currentSelection].classList.remove('selected');
@@ -210,13 +227,11 @@
             const link = selectedItem.querySelector('a');
             
             if (link) {
-                window.location.href = link.href;
-            } else {
-                const text = selectedItem.textContent.trim();
-                if (text === 'Projects') {
-                    alert('Projects page coming soon!');
+                if (link.target === '_blank') {
+                    window.open(link.href, '_blank');
+                } else {
+                    window.location.href = link.href;
                 }
-                // Now Playing popup removed - ready for custom functionality
             }
         }
     </script>

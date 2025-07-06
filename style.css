@@ -1,15 +1,14 @@
 /* Font settings */
 @font-face {
-    font-family: 'Chicago';
-    src: url('fonts/chicago-font.woff2') format('woff2'),
-         url('fonts/chicago-font.woff') format('woff');
+    font-family: 'Macintosh Regular';
+    src: url('fonts/macintosh-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 /* Font settings for pixelated effect */
 .pixel-text {
-    font-family: 'Chicago', 'Monaco', 'Lucida Console', 'Courier New', monospace; /* Use retro fonts */
+    font-family: 'Macintosh Regular', 'Monaco', 'Lucida Console', 'Courier New', monospace; /* Use retro fonts */
     font-size: 14px; /* Adjust size for better pixelation */
     line-height: .69; /* Keep the lines close together */
     letter-spacing: 0px; /* Slight spacing to mimic pixelated UI */
@@ -34,7 +33,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #dadace; /* Light gray background */
-    font-family: 'Chicago', sans-serif;
+    font-family: 'Macintosh Regular', sans-serif;
 }
 
 /* iPod Screen */
@@ -291,12 +290,12 @@ body {
     margin: 5px 0;
     width: 100%;
     text-align: left;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .menu li {
     font-size: 16px;
-    padding: 8px 20px;
+    padding: 8px 10px;
     color: #333; /* Dark gray for inactive items */
     cursor: pointer;
 }
@@ -315,10 +314,10 @@ body {
 .menu .selected {
     background-color: #333; /* Dark grey background */
     color: #BDBDBD; /* Same color as screen background - like pixels turned off */
-    font-weight: bold;
+    font-weight: normal;
     border-radius: 3px;
     margin: 2px 5px; /* Reduced side margins */
-    padding: 6px 20px; /* Increased horizontal padding */
+    padding: 6px 10px; /* Increased horizontal padding */
     /* Removed transition to prevent text jitter */
 }
 
@@ -335,4 +334,160 @@ body {
     text-align: center;
     background-color: #EDEDED; /* Match top section */
     border-top: 2px solid #A9AAA7; /* Add a subtle separation line */
+}
+
+/* Now Playing Styles */
+.now-playing-content {
+    flex: 1;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.track-info {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.track-number {
+    font-size: 11px;
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.song-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.artist-name {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.album-name {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+/* Progress Bar */
+.progress-container {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #999;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 35%; /* Represents current progress */
+    height: 100%;
+    background-color: #333;
+    border-radius: 2px;
+}
+
+/* Time Display */
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.current-time {
+    font-weight: bold;
+}
+
+.remaining-time {
+    font-weight: bold;
+}
+
+/* Back Button */
+.back-button {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.back-button.selected {
+    background-color: #333;
+    color: #BDBDBD;
+    font-weight: bold;
+    border-radius: 3px;
+    margin: 2px 5px;
+    padding: 6px 20px;
+}
+
+.back-button.selected a {
+    color: #BDBDBD !important;
+}
+
+/* Preview Page Styles */
+.preview-content {
+    flex: 1;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px 15px;
+    overflow-y: auto;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.profile-title {
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.profile-location {
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #999;
+    margin: 10px 0;
+}
+
+.info-section {
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 6px;
+    padding: 0 5px;
+}
+
+.info-item .label {
+    font-weight: bold;
+}
+
+.info-item .value {
+    text-align: right;
+    max-width: 60%;
 }
