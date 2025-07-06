@@ -332,8 +332,8 @@ body {
     font-size: 12px;
     color: #666;
     text-align: center;
-    background-color: #EDEDED; /* Match top section */
-    border-top: 2px solid #A9AAA7; /* Add a subtle separation line */
+    background-color: #BDBDBD; /* Match iPod screen color */
+    border-top: 2px solid #333; /* Add a subtle separation line */
 }
 
 /* Now Playing Styles */
@@ -479,15 +479,19 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
-    margin-bottom: 6px;
-    padding: 0 5px;
+    margin-bottom: 10px;
+    padding: 2px 5px;
+    line-height: 1.3; /* Add proper line spacing for wrapped text */
+    align-items: flex-start; /* Align items to top to handle multi-line content */
 }
 
 .info-item .label {
-    font-weight: bold;
+    font-weight: normal;
+    line-height: 1.3; /* Add proper line spacing for wrapped text */
 }
 
 .info-item .value {
     text-align: right;
     max-width: 60%;
+    line-height: 1.3; /* Ensure proper line spacing for wrapped text */
 }

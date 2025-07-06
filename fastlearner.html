@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Learner - Dylan Murphy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="ipod-body">
+        <div class="ipod-screen">
+            <!-- Top Section -->
+            <div class="ipod-top">
+                <div class="ipod-top-middle">
+                    <p class="ipod-top-middle-text pixel-text">Fast Learner</p>
+                </div>
+                <img src="images/battery.png" alt="Battery" class="battery">
+            </div>
+
+            <!-- Main Content -->
+            <div class="preview-content">
+                <div class="profile-section">
+                    <div class="profile-name pixel-text">Quick Adaptation</div>
+                    <div class="profile-title pixel-text">Learning & Development</div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">New Technology:</span>
+                        <span class="value pixel-text">AI & AI Agents</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Time to Proficiency:</span>
+                        <span class="value pixel-text">2-3 months</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Learning Method:</span>
+                        <span class="value pixel-text">Hands-on experimentation</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Primary Focus:</span>
+                        <span class="value pixel-text">AI-assisted development</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Context:</span>
+                        <span class="value pixel-text">Personal coding projects</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Outcome:</span>
+                        <span class="value pixel-text">Dramatically improved efficiency</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Application:</span>
+                        <span class="value pixel-text">Code generation & debugging</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Time Savings:</span>
+                        <span class="value pixel-text">50-70% reduction in dev time</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Tools Mastered:</span>
+                        <span class="value pixel-text">GitHub Copilot, ChatGPT, Claude</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Key Strength:</span>
+                        <span class="value pixel-text">Rapid technology adoption</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Approach:</span>
+                        <span class="value pixel-text">Learn by doing, iterate fast</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="back-button selected">
+                    <a href="skills.html" style="color: #BDBDBD; text-decoration: none;">← Back</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Click Wheel -->
+        <div class="click-wheel" id="clickWheel">
+            <div class="button center" id="centerButton"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple navigation back to skills page
+        document.getElementById('centerButton').addEventListener('click', function() {
+            window.location.href = 'skills.html';
+        });
+
+        // Add click wheel rotation and scrolling functionality
+        let isRotating = false;
+        let startAngle = 0;
+        let currentRotation = 0;
+        let accumulatedRotation = 0;
+
+        const clickWheel = document.getElementById('clickWheel');
+        const scrollableContent = document.querySelector('.preview-content');
+
+        clickWheel.addEventListener('mousedown', function(e) {
+            // Don't start rotating if clicking the center button
+            if (e.target === document.getElementById('centerButton')) return;
+            
+            isRotating = true;
+            const rect = clickWheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            startAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isRotating) return;
+            
+            const rect = clickWheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const currentAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            
+            let angleDiff = currentAngle - startAngle;
+            
+            // Handle angle wraparound (from -180 to 180)
+            if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+            if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+            
+            currentRotation += angleDiff * (180 / Math.PI);
+            accumulatedRotation += angleDiff * (180 / Math.PI);
+            
+            // Scroll the content based on rotation
+            const scrollSensitivity = 4; // Adjust this value to change scroll speed
+            const scrollAmount = angleDiff * scrollSensitivity * 10;
+            scrollableContent.scrollTop += scrollAmount;
+            
+            clickWheel.style.transform = `rotate(${currentRotation}deg)`;
+            startAngle = currentAngle;
+        });
+
+        document.addEventListener('mouseup', function() {
+            isRotating = false;
+        });
+    </script>
+</body>
+</html>

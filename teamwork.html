@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teamwork - Dylan Murphy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="ipod-body">
+        <div class="ipod-screen">
+            <!-- Top Section -->
+            <div class="ipod-top">
+                <div class="ipod-top-middle">
+                    <p class="ipod-top-middle-text pixel-text">Teamwork</p>
+                </div>
+                <img src="images/battery.png" alt="Battery" class="battery">
+            </div>
+
+            <!-- Main Content -->
+            <div class="preview-content">
+                <div class="profile-section">
+                    <div class="profile-name pixel-text">Collaboration</div>
+                    <div class="profile-title pixel-text">Team Dynamics & Support</div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Team Size:</span>
+                        <span class="value pixel-text">4 developers</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Project Type:</span>
+                        <span class="value pixel-text">Video Game Development</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Duration:</span>
+                        <span class="value pixel-text">10 weeks</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Project:</span>
+                        <span class="value pixel-text">Collaborative game development</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">My Role:</span>
+                        <span class="value pixel-text">Core developer & coordinator</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Team Impact:</span>
+                        <span class="value pixel-text">Successful project delivery</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Challenges:</span>
+                        <span class="value pixel-text">Coordinating 4 schedules</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Solutions:</span>
+                        <span class="value pixel-text">Regular sync meetings</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Outcome:</span>
+                        <span class="value pixel-text">On-time, functional game</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="label pixel-text">Communication:</span>
+                        <span class="value pixel-text">Clear, frequent updates</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label pixel-text">Tools Used:</span>
+                        <span class="value pixel-text">Git, Discord, shared docs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="back-button selected">
+                    <a href="skills.html" style="color: #BDBDBD; text-decoration: none;">← Back</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Click Wheel -->
+        <div class="click-wheel" id="clickWheel">
+            <div class="button center" id="centerButton"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple navigation back to skills page
+        document.getElementById('centerButton').addEventListener('click', function() {
+            window.location.href = 'skills.html';
+        });
+
+        // Add click wheel rotation and scrolling functionality
+        let isRotating = false;
+        let startAngle = 0;
+        let currentRotation = 0;
+        let accumulatedRotation = 0;
+
+        const clickWheel = document.getElementById('clickWheel');
+        const scrollableContent = document.querySelector('.preview-content');
+
+        clickWheel.addEventListener('mousedown', function(e) {
+            // Don't start rotating if clicking the center button
+            if (e.target === document.getElementById('centerButton')) return;
+            
+            isRotating = true;
+            const rect = clickWheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            startAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isRotating) return;
+            
+            const rect = clickWheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const currentAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            
+            let angleDiff = currentAngle - startAngle;
+            
+            // Handle angle wraparound (from -180 to 180)
+            if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+            if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+            
+            currentRotation += angleDiff * (180 / Math.PI);
+            accumulatedRotation += angleDiff * (180 / Math.PI);
+            
+            // Scroll the content based on rotation
+            const scrollSensitivity = 4; // Adjust this value to change scroll speed
+            const scrollAmount = angleDiff * scrollSensitivity * 10;
+            scrollableContent.scrollTop += scrollAmount;
+            
+            clickWheel.style.transform = `rotate(${currentRotation}deg)`;
+            startAngle = currentAngle;
+        });
+
+        document.addEventListener('mouseup', function() {
+            isRotating = false;
+        });
+    </script>
+</body>
+</html>
