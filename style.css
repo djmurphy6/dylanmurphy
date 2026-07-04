@@ -122,24 +122,52 @@ body {
     pointer-events: none;
 }
 
+/* Menu list */
 .menu {
     list-style: none;
+    padding: 0;
+    margin: 0 0 5px;
+    width: 100%;
+    text-align: left;
+    font-weight: normal;
     font-size: 14px;
     color: #333;
 }
 
 .menu li {
-    margin: 5px 0;
+    font-size: 16px;
+    margin: 5px 5px;
+    padding: 8px 10px;
+    color: #333;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
 }
 
-.menu .active {
-    background: #444;
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 5px;
+.menu li:first-child {
+    margin-top: 0;
 }
 
-/* Click Wheel */
+.menu li::after {
+    content: '>';
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    right: 15px;
+}
+
+/* Highlighted (selected) menu item — visual only, same box size as unselected */
+.menu .selected {
+    background-color: #333;
+    color: #BDBDBD;
+    font-weight: normal;
+    border-radius: 3px;
+}
+
+.menu .selected::after {
+    color: #BDBDBD;
+}
 .click-wheel {
     margin-top: 74px; 
     position: relative;
@@ -283,49 +311,7 @@ body {
     background-color: #FFF; /* White content area */
 }
 
-/* Menu list */
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 5px 0;
-    width: 100%;
-    text-align: left;
-    font-weight: normal;
-}
-
-.menu li {
-    font-size: 16px;
-    padding: 8px 10px;
-    color: #333; /* Dark gray for inactive items */
-    cursor: pointer;
-}
-
-.menu li::after {
-    content: '>'; /* Unicode for right-facing arrow */
-    font-size: 16px; /* Match the text size */
-    font-weight: bold;
-    color: #000; /* Arrow color */
-    position: absolute;
-    right: 15px; /* Moved arrow closer to center */
-    padding-right: 0; /* Removed extra padding */
-}
-
-/* Highlighted (selected) menu item */
-.menu .selected {
-    background-color: #333; /* Dark grey background */
-    color: #BDBDBD; /* Same color as screen background - like pixels turned off */
-    font-weight: normal;
-    border-radius: 3px;
-    margin: 2px 5px; /* Reduced side margins */
-    padding: 6px 10px; /* Increased horizontal padding */
-    /* Removed transition to prevent text jitter */
-}
-
-.menu .selected::after {
-    color: #BDBDBD; /* Same color as screen background for the arrow */
-}
-
-/* Footer Section */
+/* Click Wheel */
 .footer {
     width: 100%;
     padding: 10px;

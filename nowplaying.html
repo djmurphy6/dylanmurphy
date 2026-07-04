@@ -48,11 +48,6 @@
                     <span class="current-time">1:09</span>
                     <span class="remaining-time">-3:33</span>
                 </div>
-                
-                <!-- Back Button -->
-                <div class="back-button">
-                    <a href="index.html" class="pixel-text" style="color: inherit; text-decoration: none;">← Back</a>
-                </div>
             </div>
         </div>
         
@@ -69,37 +64,25 @@
     </div>
 
     <script>
-        let currentSelection = 0;
-        const menuItems = document.querySelectorAll('.back-button');
         const clickWheel = document.getElementById('click-wheel');
         const centerButton = document.getElementById('center-button');
-        
+
         let isMouseDown = false;
         let lastAngle = 0;
         let totalRotation = 0;
         const sensitivity = 1.5;
-        
-        // Initialize first item as selected
-        if (menuItems.length > 0) {
-            menuItems[currentSelection].classList.add('selected');
-        }
 
-        // Get angle from center of wheel
         function getAngle(event, element) {
             const rect = element.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            
             const x = event.clientX - centerX;
             const y = event.clientY - centerY;
-            
             return Math.atan2(y, x) * (180 / Math.PI);
         }
 
-        // Mouse events for spinning
         clickWheel.addEventListener('mousedown', function(e) {
             if (e.target === centerButton) return;
-            
             isMouseDown = true;
             lastAngle = getAngle(e, clickWheel);
             clickWheel.style.cursor = 'grabbing';
@@ -108,26 +91,7 @@
 
         document.addEventListener('mousemove', function(e) {
             if (!isMouseDown) return;
-            
-            const currentAngle = getAngle(e, clickWheel);
-            let deltaAngle = currentAngle - lastAngle;
-            
-            if (deltaAngle > 180) deltaAngle -= 360;
-            if (deltaAngle < -180) deltaAngle += 360;
-            
-            totalRotation += deltaAngle * sensitivity;
-            
-            const rotationThreshold = 30;
-            if (Math.abs(totalRotation) >= rotationThreshold) {
-                if (totalRotation > 0) {
-                    navigateDown();
-                } else {
-                    navigateUp();
-                }
-                totalRotation = 0;
-            }
-            
-            lastAngle = currentAngle;
+            lastAngle = getAngle(e, clickWheel);
         });
 
         document.addEventListener('mouseup', function() {
@@ -136,39 +100,16 @@
             totalRotation = 0;
         });
 
-        // Touch events for mobile
         clickWheel.addEventListener('touchstart', function(e) {
             if (e.target === centerButton) return;
-            
             isMouseDown = true;
-            const touch = e.touches[0];
-            lastAngle = getAngle(touch, clickWheel);
+            lastAngle = getAngle(e.touches[0], clickWheel);
             e.preventDefault();
         });
 
         document.addEventListener('touchmove', function(e) {
             if (!isMouseDown) return;
-            
-            const touch = e.touches[0];
-            const currentAngle = getAngle(touch, clickWheel);
-            let deltaAngle = currentAngle - lastAngle;
-            
-            if (deltaAngle > 180) deltaAngle -= 360;
-            if (deltaAngle < -180) deltaAngle += 360;
-            
-            totalRotation += deltaAngle * sensitivity;
-            
-            const rotationThreshold = 25;
-            if (Math.abs(totalRotation) >= rotationThreshold) {
-                if (totalRotation > 0) {
-                    navigateDown();
-                } else {
-                    navigateUp();
-                }
-                totalRotation = 0;
-            }
-            
-            lastAngle = currentAngle;
+            lastAngle = getAngle(e.touches[0], clickWheel);
             e.preventDefault();
         });
 
@@ -177,66 +118,35 @@
             totalRotation = 0;
         });
 
-        // Center button functionality
         centerButton.addEventListener('click', function(e) {
             e.stopPropagation();
-            selectCurrentItem();
+            window.location.href = 'index.html';
         });
 
-        // Gen 1 compass button functionality
-        const btnMenu = document.getElementById('btn-menu');
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const btnPlay = document.getElementById('btn-play');
-
-        btnMenu.addEventListener('click', function(e) {
+        document.getElementById('btn-menu').addEventListener('click', function(e) {
             e.stopPropagation();
             window.history.back();
         });
-        btnPrev.addEventListener('click', function(e) {
+
+        document.getElementById('btn-prev').addEventListener('click', function(e) {
             e.stopPropagation();
-            navigateUp();
-        });
-        btnNext.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navigateDown();
-        });
-        btnPlay.addEventListener('click', function(e) {
-            e.stopPropagation();
-            selectCurrentItem();
         });
 
-        // Keyboard navigation
+        document.getElementById('btn-next').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        document.getElementById('btn-play').addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.location.href = 'index.html';
+        });
+
         document.addEventListener('keydown', function(e) {
-            switch(e.key) {
-                case 'ArrowUp':
-                    e.preventDefault();
-                    navigateUp();
-                    break;
-                case 'ArrowDown':
-                    e.preventDefault();
-                    navigateDown();
-                    break;
-                case 'Enter':
-                case ' ':
-                    e.preventDefault();
-                    selectCurrentItem();
-                    break;
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.location.href = 'index.html';
             }
         });
-
-        function navigateUp() {
-            // Navigation disabled on Now Playing screen
-        }
-
-        function navigateDown() {
-            // Navigation disabled on Now Playing screen
-        }
-
-        function selectCurrentItem() {
-            // Go back to main menu
-            window.location.href = 'index.html';
-        }
     </script>
 </body>
 </html>
