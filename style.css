@@ -497,31 +497,23 @@ body {
 }
 
 /* ── Gen 1 iPod outer button ring ────────────────────────────────────────── */
-/* Separate ring that surrounds the click wheel, matching the 2001 iPod design */
 .wheel-container {
     position: relative;
     width: 352px;
     height: 352px;
     margin-top: 40px;
-    /* Gloss layers matching the iPod body / click wheel treatment */
     background:
         radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55) 0%, transparent 45%),
         radial-gradient(circle at 68% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 30%),
         linear-gradient(145deg, #F0F0F0 0%, #E0E0E0 100%);
     border-radius: 50%;
-    border: .2px solid #333;
+    border: none;
+    /* Soft shadow edge — no hard border line on the outer ring */
     box-shadow:
-        /* Inner border definition */
-        inset 0 0 0 1px rgba(0, 0, 0, 0.35),
-        /* Top depth shadow */
         inset 0 2px 6px rgba(0, 0, 0, 0.18),
-        /* Bottom light reflection */
         inset 0 -3px 6px rgba(255, 255, 255, 0.7),
-        /* Upper inner glow */
         inset 0 8px 18px rgba(255, 255, 255, 0.22),
-        /* Outer bright border */
-        0 0 0 1px rgba(255, 255, 255, 0.28),
-        /* Outer drop shadow */
+        0 0 0 1.5px rgba(0, 0, 0, 0.18),
         0 4px 12px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
@@ -536,77 +528,100 @@ body {
     clip-path: circle(50% at 50% 50%);
     background: conic-gradient(
         transparent      44.6deg,
-        rgba(0,0,0,0.28) 44.6deg 45.4deg,
-        rgba(255,255,255,0.4) 45.4deg 45.9deg,
-        transparent      45.9deg 134.6deg,
-        rgba(0,0,0,0.28) 134.6deg 135.4deg,
-        rgba(255,255,255,0.4) 135.4deg 135.9deg,
-        transparent      135.9deg 224.6deg,
-        rgba(0,0,0,0.28) 224.6deg 225.4deg,
-        rgba(255,255,255,0.4) 225.4deg 225.9deg,
-        transparent      225.9deg 314.6deg,
-        rgba(0,0,0,0.28) 314.6deg 315.4deg,
-        rgba(255,255,255,0.4) 315.4deg 315.9deg,
-        transparent      315.9deg
+        rgba(0,0,0,0.35) 44.6deg 45.4deg,
+        transparent      45.4deg 134.6deg,
+        rgba(0,0,0,0.35) 134.6deg 135.4deg,
+        transparent      135.4deg 224.6deg,
+        rgba(0,0,0,0.35) 224.6deg 225.4deg,
+        transparent      225.4deg 314.6deg,
+        rgba(0,0,0,0.35) 314.6deg 315.4deg,
+        transparent      315.4deg
     );
     pointer-events: none;
 }
 
-/* Cancel the standalone click-wheel top margin when inside the container */
+/* Hard black line separating the button ring from the click wheel */
 .wheel-container .click-wheel {
+    position: relative;
+    z-index: 2;
     margin-top: 0;
+    border: 1.5px solid rgba(0, 0, 0, 0.65);
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        inset 0 -2px 3px rgba(255, 255, 255, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Compass buttons in the 34 px ring band between container edge and click wheel */
+/*
+ * Each button fills the whole container (inset: 0) and is clipped to its
+ * 90° ring-arc by clip-path: path(). clip-path also restricts pointer events
+ * to that arc so the click wheel beneath stays fully interactive.
+ *
+ * Arc geometry: outer r=176, inner r=142, container 352×352, center (176,176).
+ * Separators at 45° / 135° / 225° / 315°  (0° = top, clockwise).
+ */
 .wheel-btn {
     position: absolute;
-    background: none;
+    inset: 0;
+    background: transparent;
     border: none;
     cursor: pointer;
-    font-family: 'Macintosh Regular', 'Monaco', 'Lucida Console', 'Courier New', monospace;
-    color: #555;
-    z-index: 2;
+    z-index: 1;
+    display: flex;
     padding: 0;
     user-select: none;
+    font-family: 'Macintosh Regular', 'Monaco', 'Lucida Console', 'Courier New', monospace;
+    color: #999;
     -webkit-font-smoothing: none;
     font-smooth: never;
     letter-spacing: 0.5px;
     line-height: 1;
 }
 
-.wheel-btn:hover { color: #111; }
-.wheel-btn:active { opacity: 0.5; }
+.wheel-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #666;
+}
 
-/* menu label — small text at 12 o'clock */
+.wheel-btn:active {
+    background: rgba(0, 0, 0, 0.1);
+    color: #444;
+}
+
+/* menu — top arc, 315° → 45° through 0° */
 .btn-menu {
     font-size: 10px;
-    top: 11px;
-    left: 50%;
-    transform: translateX(-50%);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 11px;
+    clip-path: path('M 75.6 75.6 A 142 142 0 0 1 276.4 75.6 L 300.4 51.6 A 176 176 0 0 0 51.6 51.6 Z');
 }
 
-/* ⏮ at 9 o'clock */
+/* ⏮ — left arc, 225° → 315° */
 .btn-prev {
     font-size: 16px;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5px;
+    clip-path: path('M 75.6 276.4 A 142 142 0 0 1 75.6 75.6 L 51.6 51.6 A 176 176 0 0 0 51.6 300.4 Z');
 }
 
-/* ⏭ at 3 o'clock */
+/* ⏭ — right arc, 45° → 135° */
 .btn-next {
     font-size: 16px;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px;
+    clip-path: path('M 276.4 75.6 A 142 142 0 0 1 276.4 276.4 L 300.4 300.4 A 176 176 0 0 0 300.4 51.6 Z');
 }
 
-/* ⏯ at 6 o'clock */
+/* ⏯ — bottom arc, 135° → 225° */
 .btn-play {
     font-size: 16px;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 8px;
+    clip-path: path('M 276.4 276.4 A 142 142 0 0 1 75.6 276.4 L 51.6 300.4 A 176 176 0 0 0 300.4 300.4 Z');
 }
 
 /* ── Responsive iPod scaling ─────────────────────────────────────────────── */
