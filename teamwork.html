@@ -98,9 +98,15 @@
             </div>
         </div>
 
-        <!-- Click Wheel -->
-        <div class="click-wheel" id="clickWheel">
-            <div class="button center" id="centerButton"></div>
+        <!-- Gen 1 outer button ring + click wheel -->
+        <div class="wheel-container">
+            <button class="wheel-btn btn-menu" id="btn-menu">menu</button>
+            <button class="wheel-btn btn-prev" id="btn-prev">⏮</button>
+            <button class="wheel-btn btn-next" id="btn-next">⏭</button>
+            <button class="wheel-btn btn-play" id="btn-play">⏯</button>
+            <div class="click-wheel" id="clickWheel">
+                <div class="button center" id="centerButton"></div>
+            </div>
         </div>
     </div>
 
@@ -120,7 +126,6 @@
         const scrollableContent = document.querySelector('.preview-content');
 
         clickWheel.addEventListener('mousedown', function(e) {
-            // Don't start rotating if clicking the center button
             if (e.target === document.getElementById('centerButton')) return;
             
             isRotating = true;
@@ -159,6 +164,24 @@
 
         document.addEventListener('mouseup', function() {
             isRotating = false;
+        });
+
+        // Gen 1 compass button functionality
+        document.getElementById('btn-menu').addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.history.back();
+        });
+        document.getElementById('btn-prev').addEventListener('click', function(e) {
+            e.stopPropagation();
+            scrollableContent.scrollBy({ top: -60, behavior: 'smooth' });
+        });
+        document.getElementById('btn-next').addEventListener('click', function(e) {
+            e.stopPropagation();
+            scrollableContent.scrollBy({ top: 60, behavior: 'smooth' });
+        });
+        document.getElementById('btn-play').addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.location.href = 'skills.html';
         });
     </script>
 </body>

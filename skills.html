@@ -34,12 +34,16 @@
             </ul>
         </div>
         
-        <!-- Click Wheel -->
-        <div class="click-wheel" id="click-wheel">
-            <div class="button center" id="center-button" style="border-radius: 50%; width: 100px; height: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <!-- Gen 1 outer button ring + click wheel -->
+        <div class="wheel-container">
+            <button class="wheel-btn btn-menu" id="btn-menu">menu</button>
+            <button class="wheel-btn btn-prev" id="btn-prev">⏮</button>
+            <button class="wheel-btn btn-next" id="btn-next">⏭</button>
+            <button class="wheel-btn btn-play" id="btn-play">⏯</button>
+            <div class="click-wheel" id="click-wheel">
+                <div class="button center" id="center-button" style="border-radius: 50%; width: 100px; height: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </div>
         </div>
-
-        <!-- iPod Buttons -->
     </div>
 
     <script>
@@ -153,6 +157,29 @@
 
         // Center button functionality
         centerButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            selectCurrentItem();
+        });
+
+        // Gen 1 compass button functionality
+        const btnMenu = document.getElementById('btn-menu');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnPlay = document.getElementById('btn-play');
+
+        btnMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.history.back();
+        });
+        btnPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateUp();
+        });
+        btnNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateDown();
+        });
+        btnPlay.addEventListener('click', function(e) {
             e.stopPropagation();
             selectCurrentItem();
         });

@@ -495,3 +495,159 @@ body {
     max-width: 60%;
     line-height: 1.3; /* Ensure proper line spacing for wrapped text */
 }
+
+/* ── Gen 1 iPod outer button ring ────────────────────────────────────────── */
+/* Separate ring that surrounds the click wheel, matching the 2001 iPod design */
+.wheel-container {
+    position: relative;
+    width: 352px;
+    height: 352px;
+    margin-top: 40px;
+    /* Gloss layers matching the iPod body / click wheel treatment */
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 68% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 30%),
+        linear-gradient(145deg, #F0F0F0 0%, #E0E0E0 100%);
+    border-radius: 50%;
+    border: .2px solid #333;
+    box-shadow:
+        /* Inner border definition */
+        inset 0 0 0 1px rgba(0, 0, 0, 0.35),
+        /* Top depth shadow */
+        inset 0 2px 6px rgba(0, 0, 0, 0.18),
+        /* Bottom light reflection */
+        inset 0 -3px 6px rgba(255, 255, 255, 0.7),
+        /* Upper inner glow */
+        inset 0 8px 18px rgba(255, 255, 255, 0.22),
+        /* Outer bright border */
+        0 0 0 1px rgba(255, 255, 255, 0.28),
+        /* Outer drop shadow */
+        0 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Engraved divider lines at 45° / 135° / 225° / 315° */
+.wheel-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: circle(50% at 50% 50%);
+    background: conic-gradient(
+        transparent      44.6deg,
+        rgba(0,0,0,0.28) 44.6deg 45.4deg,
+        rgba(255,255,255,0.4) 45.4deg 45.9deg,
+        transparent      45.9deg 134.6deg,
+        rgba(0,0,0,0.28) 134.6deg 135.4deg,
+        rgba(255,255,255,0.4) 135.4deg 135.9deg,
+        transparent      135.9deg 224.6deg,
+        rgba(0,0,0,0.28) 224.6deg 225.4deg,
+        rgba(255,255,255,0.4) 225.4deg 225.9deg,
+        transparent      225.9deg 314.6deg,
+        rgba(0,0,0,0.28) 314.6deg 315.4deg,
+        rgba(255,255,255,0.4) 315.4deg 315.9deg,
+        transparent      315.9deg
+    );
+    pointer-events: none;
+}
+
+/* Cancel the standalone click-wheel top margin when inside the container */
+.wheel-container .click-wheel {
+    margin-top: 0;
+}
+
+/* Compass buttons in the 34 px ring band between container edge and click wheel */
+.wheel-btn {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Macintosh Regular', 'Monaco', 'Lucida Console', 'Courier New', monospace;
+    color: #555;
+    z-index: 2;
+    padding: 0;
+    user-select: none;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    letter-spacing: 0.5px;
+    line-height: 1;
+}
+
+.wheel-btn:hover { color: #111; }
+.wheel-btn:active { opacity: 0.5; }
+
+/* menu label — small text at 12 o'clock */
+.btn-menu {
+    font-size: 10px;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ⏮ at 9 o'clock */
+.btn-prev {
+    font-size: 16px;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ⏭ at 3 o'clock */
+.btn-next {
+    font-size: 16px;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ⏯ at 6 o'clock */
+.btn-play {
+    font-size: 16px;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ── Responsive iPod scaling ─────────────────────────────────────────────── */
+@media screen and (max-height: 730px) {
+    body {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 10px 0;
+        height: auto;
+        min-height: 100dvh;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    body {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 10px 0;
+        height: auto;
+        min-height: 100dvh;
+    }
+
+    .ipod-body {
+        transform: scale(0.88);
+        transform-origin: top center;
+        margin-bottom: -85px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .ipod-body {
+        transform: scale(0.75);
+        transform-origin: top center;
+        margin-bottom: -178px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .ipod-body {
+        transform: scale(0.65);
+        transform-origin: top center;
+        margin-bottom: -249px;
+    }
+}
