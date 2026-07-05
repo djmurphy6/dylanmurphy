@@ -586,29 +586,69 @@ body {
     clip-path: path('M 75.6 75.6 A 142 142 0 0 1 276.4 75.6 L 300.4 51.6 A 176 176 0 0 0 51.6 51.6 Z');
 }
 
-/* ⏮ — left arc, 225° → 315° */
+/* prev — left arc, 225° → 315° */
 .btn-prev {
-    font-size: 20px;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 5px;
+    padding-left: 8px;
     clip-path: path('M 75.6 276.4 A 142 142 0 0 1 75.6 75.6 L 51.6 51.6 A 176 176 0 0 0 51.6 300.4 Z');
 }
 
-/* ⏭ — right arc, 45° → 135° */
+/* next — right arc, 45° → 135° */
 .btn-next {
-    font-size: 20px;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 5px;
+    padding-right: 8px;
     clip-path: path('M 276.4 75.6 A 142 142 0 0 1 276.4 276.4 L 300.4 300.4 A 176 176 0 0 0 300.4 51.6 Z');
 }
 
-/* ⏯ — bottom arc, 135° → 225° */
+/* play/pause — bottom arc, 135° → 225° */
 .btn-play {
-    font-size: 20px;
     align-items: flex-end;
     justify-content: center;
     padding-bottom: 8px;
     clip-path: path('M 276.4 276.4 A 142 142 0 0 1 75.6 276.4 L 51.6 300.4 A 176 176 0 0 0 300.4 300.4 Z');
+}
+
+/* SVG icons — avoids iOS rendering Unicode controls as emoji */
+.btn-prev,
+.btn-next,
+.btn-play {
+    font-size: 0;
+    color: transparent;
+}
+
+.btn-prev::before,
+.btn-next::before,
+.btn-play::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 12px;
+    background: center / contain no-repeat;
+}
+
+.btn-prev::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12'%3E%3Crect x='1' y='1' width='2' height='10' fill='%23999'/%3E%3Cpolygon points='9,1 9,11 3,6' fill='%23999'/%3E%3Cpolygon points='15,1 15,11 9,6' fill='%23999'/%3E%3C/svg%3E");
+}
+
+.btn-next::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12'%3E%3Cpolygon points='1,1 1,11 7,6' fill='%23999'/%3E%3Cpolygon points='7,1 7,11 13,6' fill='%23999'/%3E%3Crect x='13' y='1' width='2' height='10' fill='%23999'/%3E%3C/svg%3E");
+}
+
+.btn-play::before {
+    width: 17px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 12'%3E%3Cpolygon points='1,1 1,11 7,6' fill='%23999'/%3E%3Crect x='10' y='1' width='2' height='10' fill='%23999'/%3E%3Crect x='14' y='1' width='2' height='10' fill='%23999'/%3E%3C/svg%3E");
+}
+
+.btn-prev:hover::before,
+.btn-next:hover::before,
+.btn-play:hover::before {
+    filter: brightness(0.55);
+}
+
+.btn-prev:active::before,
+.btn-next:active::before,
+.btn-play:active::before {
+    filter: brightness(0.4);
 }
