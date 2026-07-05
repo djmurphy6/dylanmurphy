@@ -24,7 +24,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp -r *.html style.css CNAME .nojekyll fonts images _site/
+          cp -r *.html style.css CNAME .nojekyll fonts images js screens _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

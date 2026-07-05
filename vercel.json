@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!images/|fonts/|js/|screens/|style\\.css|vercel\\.json).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
