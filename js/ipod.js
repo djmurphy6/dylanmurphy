@@ -69,7 +69,6 @@
         if (e.target === centerButton) return;
         isDragging = true;
         lastAngle = getAngle(e, clickWheel);
-        clickWheel.style.cursor = 'grabbing';
         e.preventDefault();
     });
 
@@ -83,7 +82,6 @@
 
     document.addEventListener('mouseup', function () {
         isDragging = false;
-        clickWheel.style.cursor = 'grab';
         totalRotation = 0;
     });
 

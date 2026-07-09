@@ -36,6 +36,99 @@ body {
     font-family: 'Macintosh Regular', sans-serif;
 }
 
+/* Custom warm-white light cursor (fine pointers only; touch keeps native) */
+@media (hover: hover) and (pointer: fine) {
+    *,
+    *::before,
+    *::after {
+        cursor: none !important;
+    }
+}
+
+/* Wrapper: JS moves this with a soft trailing lerp and stretches it
+   along the direction of movement (translate + rotate + scale) */
+.cursor-blob {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0);
+    transition: opacity 0.8s ease;
+    mix-blend-mode: plus-lighter;
+    will-change: transform, opacity;
+}
+
+.cursor-blob.is-visible {
+    opacity: 1;
+}
+
+/* Core: the light itself — blurred, breathing, slowly morphing shape */
+.cursor-blob-core {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 45% 40%,
+        rgba(235, 255, 240, 0.9) 0%,
+        rgba(195, 245, 205, 0.5) 40%,
+        rgba(165, 235, 180, 0.15) 65%,
+        transparent 80%
+    );
+    box-shadow:
+        0 0 12px 4px rgba(200, 245, 210, 0.45),
+        0 0 28px 11px rgba(170, 235, 185, 0.2);
+    border-radius: 50%;
+    filter: blur(2px);
+    transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+    animation:
+        cursor-breathe 4.8s ease-in-out infinite,
+        cursor-morph 9s ease-in-out infinite;
+    will-change: transform, border-radius;
+}
+
+/* Gentle press: the light softly settles rather than snapping */
+.cursor-blob.is-pressed .cursor-blob-core {
+    transform: scale(0.82);
+}
+
+/* Slow breathing — subtle swell and glow */
+@keyframes cursor-breathe {
+    0%, 100% {
+        opacity: 0.85;
+        filter: blur(2px);
+    }
+    50% {
+        opacity: 1;
+        filter: blur(3px);
+    }
+}
+
+/* Organic silhouette drift — the blob never sits as a perfect circle */
+@keyframes cursor-morph {
+    0%, 100% {
+        border-radius: 52% 48% 55% 45% / 48% 55% 45% 52%;
+    }
+    25% {
+        border-radius: 45% 55% 48% 52% / 55% 46% 54% 45%;
+    }
+    50% {
+        border-radius: 55% 45% 52% 48% / 45% 52% 48% 55%;
+    }
+    75% {
+        border-radius: 48% 52% 45% 55% / 52% 48% 55% 46%;
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor-blob {
+        display: none;
+    }
+}
+
 /* iPod Screen */
 .ipod-screen {
     width: 300px; /* Fixed width */
