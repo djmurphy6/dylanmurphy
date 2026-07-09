@@ -67,59 +67,64 @@ body {
     opacity: 1;
 }
 
-/* Core: the light itself — blurred, breathing, slowly morphing shape */
+/* Core: the light itself — a single, solid orb of mint light. Two layered
+   gradients give it volume like a lit sphere rather than a flat glow: a
+   dim rim shadow (lower-right, "away" from the light) plus a mint body
+   that's brightest near the light side and falls off softly at the edge.
+   Its border-radius is driven every frame by JS as one shared, synced
+   wobble so the whole silhouette breathes and stretches as one form. */
 .cursor-blob-core {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-        circle at 45% 40%,
-        rgba(235, 255, 240, 0.9) 0%,
-        rgba(195, 245, 205, 0.5) 40%,
-        rgba(165, 235, 180, 0.15) 65%,
-        transparent 80%
-    );
+    background:
+        radial-gradient(circle at 64% 70%, rgba(20, 110, 92, 0.28) 0%, transparent 58%),
+        radial-gradient(
+            circle at 40% 36%,
+            rgba(165, 245, 210, 0.42) 0%,
+            rgba(110, 228, 188, 0.4) 30%,
+            rgba(80, 210, 172, 0.24) 55%,
+            rgba(60, 190, 152, 0.1) 75%,
+            transparent 88%
+        );
     box-shadow:
-        0 0 12px 4px rgba(200, 245, 210, 0.45),
-        0 0 28px 11px rgba(170, 235, 185, 0.2);
+        0 0 10px 3px rgba(120, 228, 190, 0.3),
+        0 0 24px 9px rgba(90, 210, 172, 0.14);
     border-radius: 50%;
-    filter: blur(2px);
+    filter: blur(2.5px);
     transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
-    animation:
-        cursor-breathe 4.8s ease-in-out infinite,
-        cursor-morph 9s ease-in-out infinite;
-    will-change: transform, border-radius;
+    animation: cursor-breathe 5.5s ease-in-out infinite;
+    will-change: transform, border-radius, filter;
 }
 
-/* Gentle press: the light softly settles rather than snapping */
-.cursor-blob.is-pressed .cursor-blob-core {
-    transform: scale(0.82);
+/* Highlight: a soft, tinted (never pure-white) specular glint suggesting a
+   light source on a rounded surface. JS counter-rotates it against the
+   wrapper's rotation so it stays roughly fixed in screen space while the
+   body underneath turns/stretches to face movement — the classic cue that
+   reads as a lit 3D sphere instead of a flat, rotating decal. */
+.cursor-blob-highlight {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 36% 32%,
+        rgba(220, 255, 236, 0.32) 0%,
+        rgba(205, 250, 228, 0.14) 32%,
+        transparent 58%
+    );
+    will-change: transform;
 }
 
 /* Slow breathing — subtle swell and glow */
 @keyframes cursor-breathe {
     0%, 100% {
-        opacity: 0.85;
-        filter: blur(2px);
-    }
-    50% {
-        opacity: 1;
+        opacity: 0.7;
         filter: blur(3px);
-    }
-}
-
-/* Organic silhouette drift — the blob never sits as a perfect circle */
-@keyframes cursor-morph {
-    0%, 100% {
-        border-radius: 52% 48% 55% 45% / 48% 55% 45% 52%;
-    }
-    25% {
-        border-radius: 45% 55% 48% 52% / 55% 46% 54% 45%;
+        transform: scale(0.94);
     }
     50% {
-        border-radius: 55% 45% 52% 48% / 45% 52% 48% 55%;
-    }
-    75% {
-        border-radius: 48% 52% 45% 55% / 52% 48% 55% 46%;
+        opacity: 0.88;
+        filter: blur(4.5px);
+        transform: scale(1.06);
     }
 }
 

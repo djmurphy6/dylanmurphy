@@ -24,7 +24,7 @@ keys / Enter.
 | `js/screens.js` | Route registry — maps each path to its fragment file, wheel mode, title, and parent |
 | `js/ipod.js` | Unified click wheel + compass button controller (menu nav / scroll / static modes) |
 | `js/router.js` | Fetches/caches screen fragments, swaps `#screen-root`, handles `pushState`/`popstate` |
-| `js/cursor.js` | Sitewide custom cursor — hides the system pointer; a light green orb trails the mouse with gentle easing, stretches with movement, and drifts when idle (fine pointers only; breathing/morph animations live in `style.css`) |
+| `js/cursor.js` | Sitewide custom cursor — hides the system pointer; a cohesive mint-green orb trails the mouse with a rim-shadow + counter-rotated highlight for a lit, 3D sphere feel, tapering/bulging as one piece when dragged, with a synced idle wobble and drift when still (fine pointers only; breathing pulse lives in `style.css`) |
 | `screens/*.html` | HTML fragments for each screen (home, skills, lang, linkedin, github, nowplaying, fastlearner, teamwork, leadership, coaching) |
 | `style.css` | Single shared stylesheet (includes custom cursor styles) |
 | `vercel.json` | Rewrites all non-asset paths to `index.html` so deep links (e.g. `/skills`) resolve client-side |
