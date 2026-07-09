@@ -36,6 +36,17 @@ body {
     font-family: 'Macintosh Regular', sans-serif;
 }
 
+/* Background gravity grid — full-viewport canvas behind the iPod.
+   js/grid.js draws the grid and warps it into a depression under the
+   cursor, as if the pointer has weight and presses the sheet away from
+   the viewer. Sits behind everything; body background paints beneath it. */
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
 /* Custom warm-white light cursor (fine pointers only; touch keeps native) */
 @media (hover: hover) and (pointer: fine) {
     *,
@@ -77,18 +88,18 @@ body {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at 64% 70%, rgba(20, 110, 92, 0.28) 0%, transparent 58%),
+        radial-gradient(circle at 64% 70%, rgba(14, 90, 72, 0.32) 0%, transparent 58%),
         radial-gradient(
             circle at 40% 36%,
-            rgba(165, 245, 210, 0.42) 0%,
-            rgba(110, 228, 188, 0.4) 30%,
-            rgba(80, 210, 172, 0.24) 55%,
-            rgba(60, 190, 152, 0.1) 75%,
+            rgba(15, 150, 95, 0.45) 0%,
+            rgba(45, 175, 125, 0.42) 30%,
+            rgba(35, 150, 105, 0.28) 55%,
+            rgba(25, 130, 90, 0.12) 75%,
             transparent 88%
         );
     box-shadow:
-        0 0 10px 3px rgba(120, 228, 190, 0.3),
-        0 0 24px 9px rgba(90, 210, 172, 0.14);
+        0 0 10px 3px rgba(70, 175, 125, 0.32),
+        0 0 24px 9px rgba(45, 155, 110, 0.16);
     border-radius: 50%;
     filter: blur(2.5px);
     transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
