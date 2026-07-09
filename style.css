@@ -36,6 +36,20 @@ body {
     font-family: 'Macintosh Regular', sans-serif;
 }
 
+/* Background gravity grid — full-viewport canvas behind the iPod.
+   js/grid.js draws the grid and warps it into a depression under the
+   cursor, as if the pointer has weight and presses the sheet away from
+   the viewer. Sits behind everything; body background paints beneath it. */
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    display: block;
+}
+
 /* Custom warm-white light cursor (fine pointers only; touch keeps native) */
 @media (hover: hover) and (pointer: fine) {
     *,

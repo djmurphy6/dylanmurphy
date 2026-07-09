@@ -24,9 +24,10 @@ keys / Enter.
 | `js/screens.js` | Route registry — maps each path to its fragment file, wheel mode, title, and parent |
 | `js/ipod.js` | Unified click wheel + compass button controller (menu nav / scroll / static modes) |
 | `js/router.js` | Fetches/caches screen fragments, swaps `#screen-root`, handles `pushState`/`popstate` |
+| `js/grid.js` | Background gravity grid — fine full-viewport canvas grid behind the iPod that treats the cursor as a weight: the sheet sinks away from the viewer exactly at the pointer (gaussian depth well + perspective projection, no lag), with a soft shadow in the depression, a slightly bouncy spring on the well depth, and a heavier press while the mouse is held; the sheet is pinned to the iPod's rounded-rect silhouette (depth fades to zero at the device edge via signed-distance falloff) and drawn with an overscan margin past every viewport edge so the warp stays seamless (fine pointers only; flat static grid on touch / reduced-motion) |
 | `js/cursor.js` | Sitewide custom cursor — hides the system pointer; a cohesive mint-green orb trails the mouse with a rim-shadow + counter-rotated highlight for a lit, 3D sphere feel, tapering/bulging as one piece when dragged, with a synced idle wobble and drift when still (fine pointers only; breathing pulse lives in `style.css`) |
 | `screens/*.html` | HTML fragments for each screen (home, skills, lang, linkedin, github, nowplaying, fastlearner, teamwork, leadership, coaching) |
-| `style.css` | Single shared stylesheet (includes custom cursor styles) |
+| `style.css` | Single shared stylesheet (includes custom cursor + background grid styles) |
 | `vercel.json` | Rewrites all non-asset paths to `index.html` so deep links (e.g. `/skills`) resolve client-side |
 
 Assets: `images/` (battery, favicon) · `fonts/macintosh-regular.ttf`
@@ -72,6 +73,7 @@ In-app navigation, browser back/forward, and direct URL loads should all work.
 |--------|-------------|
 | `main` | Stable, deployed to dylanmurphy.xyz |
 | `feature/spa-shell` | SPA conversion — persistent shell + client-side routed screens |
+| `feature/gravity-grid` | Background grid that sinks away under the cursor as if it has weight |
 
 ## Hosting
 
